@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio de Desenvolvimento: Micro ERP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Focus Palette -->
+    <!-- Application Structure Plan: A single-page application with vertical scrolling. The structure is designed to guide the candidate logically through the challenge information. It starts with a clear objective, then presents key requirements in highlighted cards. Interactive tabs are used to organize detailed information (tech, tools, evaluation criteria) without overwhelming the user. A dynamic countdown timer for the deadline adds an engaging element. This structure enhances readability and user engagement compared to a static document. -->
+    <!-- Visualization & Content Choices: 
+        - Challenge Title/Objective -> Goal: Inform -> Presentation: Large Heading/Text -> Interaction: None -> Justification: Clear, immediate communication of the core task.
+        - Key Requirements -> Goal: Highlight -> Presentation: Styled Cards with Tailwind CSS -> Interaction: None -> Justification: Visually emphasizes the most critical evaluation points.
+        - Tech/Tools/Evaluation Details -> Goal: Organize -> Presentation: Tabbed Interface -> Interaction: User clicks to switch content -> Justification: Reduces cognitive load by grouping related details and revealing them on demand. Implemented with Vanilla JS.
+        - Deadline -> Goal: Engage/Inform -> Presentation: Dynamic Countdown Timer -> Interaction: Real-time updates -> Justification: Creates a sense of urgency and makes the deadline prominent and memorable. Implemented with Vanilla JS.
+        - All visual elements are built with HTML and Tailwind CSS.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .tab-active {
+            border-color: #2563eb;
+            color: #2563eb;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased">
+
+    <div class="container mx-auto max-w-4xl p-4 sm:p-6 lg:p-8">
+
+        <header class="text-center my-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-stone-900">Desafio de Desenvolvimento</h1>
+            <p class="mt-4 text-lg text-stone-600">Construa um Micro ERP para Gestão Fiscal e de Estoque</p>
+        </header>
+
+        <main>
+            <section id="objetivo" class="mb-16 p-8 bg-white rounded-xl shadow-sm border border-stone-200">
+                <h2 class="text-2xl font-bold text-stone-900 mb-4">🎯 Objetivo do Desafio</h2>
+                <p class="text-stone-700 leading-relaxed">
+                    O desafio consiste em desenvolver um software web com a funcionalidade de um Micro ERP (Enterprise Resource Planning). O sistema deve ser capaz de realizar a <strong>emissão de notas fiscais eletrônicas</strong> e fazer a <strong>gestão de estoque</strong>. O principal critério de avaliação será a qualidade e a clareza do seu código.
+                </p>
+            </section>
+            
+            <section id="avaliacao" class="mb-16">
+                 <div class="text-center mb-8">
+                     <h2 class="text-3xl font-bold text-stone-900">📝 Requisitos e Avaliação</h2>
+                     <p class="mt-2 text-stone-600">Focamos na qualidade, não na quantidade de funcionalidades.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                        <h3 class="font-bold text-lg text-blue-600 mb-2">Código Limpo é Fundamental</h3>
+                        <p class="text-stone-600">Entregue um código bem-estruturado, legível e de fácil manutenção. Esta é a principal prioridade.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                        <h3 class="font-bold text-lg text-blue-600 mb-2">Funcionalidade Parcial é Válida</h3>
+                        <p class="text-stone-600">A aplicação não precisa estar 100% funcional. Quanto mais funcionalidades operacionais, maior a pontuação.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="detalhes" class="mb-16">
+                 <div class="text-center mb-8">
+                     <h2 class="text-3xl font-bold text-stone-900">⚙️ Detalhes Técnicos</h2>
+                     <p class="mt-2 text-stone-600">Explore as sugestões e os pontos de atenção para o desenvolvimento.</p>
+                </div>
+                
+                <div>
+                    <div class="border-b border-stone-200 mb-6">
+                        <nav class="-mb-px flex justify-center space-x-6" aria-label="Tabs">
+                            <button class="tab-btn tab-active whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" data-tab="ia">✨ Uso de IA</button>
+                            <button class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 border-transparent text-stone-500 hover:text-stone-700 hover:border-stone-300 font-medium text-sm" data-tab="tecnologias">💻 Tecnologias</button>
+                            <button class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 border-transparent text-stone-500 hover:text-stone-700 hover:border-stone-300 font-medium text-sm" data-tab="ferramentas">🛠️ Ferramentas</button>
+                        </nav>
+                    </div>
+
+                    <div id="tab-content" class="bg-white p-8 rounded-xl shadow-sm border border-stone-200 min-h-[200px]">
+                        <div id="ia" class="tab-panel">
+                            <h3 class="text-xl font-bold text-stone-800 mb-3">Inteligência Artificial como Diferencial</h3>
+                            <p class="text-stone-700 mb-4">O uso de ferramentas de IA no desenvolvimento é um diferencial, mas não obrigatório.</p>
+                            <div class="bg-blue-50 border-l-4 border-blue-500 text-blue-800 p-4 rounded-r-lg">
+                                <p><strong>Ponto importante:</strong> Caso utilize IA, todos os prompts e interações com a ferramenta deverão ser documentados e enviados com o projeto. Este é um critério relevante na avaliação.</p>
+                            </div>
+                        </div>
+                        <div id="tecnologias" class="tab-panel hidden">
+                            <h3 class="text-xl font-bold text-stone-800 mb-3">Linguagens Sugeridas</h3>
+                             <p class="text-stone-700 mb-4">Estas são apenas sugestões. Sinta-se à vontade para usar a tecnologia de sua preferência.</p>
+                            <ul class="list-disc list-inside space-y-2 text-stone-700">
+                                <li>PHP</li>
+                                <li>Go</li>
+                                <li>Python</li>
+                            </ul>
+                        </div>
+                        <div id="ferramentas" class="tab-panel hidden">
+                            <h3 class="text-xl font-bold text-stone-800 mb-3">Ferramentas de Desenvolvimento</h3>
+                            <p class="text-stone-700 mb-4">Algumas sugestões para auxiliar no seu fluxo de trabalho.</p>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div>
+                                    <h4 class="font-semibold text-stone-600">Editores com IA:</h4>
+                                    <ul class="list-disc list-inside space-y-1 text-stone-700">
+                                        <li>Windsurf</li>
+                                        <li>Cursor</li>
+                                        <li>VSCode com Copilot</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-stone-600">Outras Ferramentas:</h4>
+                                     <ul class="list-disc list-inside space-y-1 text-stone-700">
+                                        <li>Lovable</li>
+                                        <li>Firebase Studio</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="entrega" class="bg-blue-600 text-white rounded-xl shadow-lg p-8 md:p-12 text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">📅 Entrega e Prazo Final</h2>
+                <p class="mb-2"><strong>Formato:</strong> O código-fonte do projeto e a documentação dos prompts de IA (se aplicável).</p>
+                <p class="font-semibold mb-6">A contagem regressiva para a entrega já começou!</p>
+                <div id="countdown" class="flex justify-center items-center space-x-4 md:space-x-8 text-center">
+                    <div>
+                        <div id="days" class="text-4xl md:text-6xl font-bold">00</div>
+                        <div class="text-sm uppercase opacity-80">Dias</div>
+                    </div>
+                     <div>
+                        <div id="hours" class="text-4xl md:text-6xl font-bold">00</div>
+                        <div class="text-sm uppercase opacity-80">Horas</div>
+                    </div>
+                     <div>
+                        <div id="minutes" class="text-4xl md:text-6xl font-bold">00</div>
+                        <div class="text-sm uppercase opacity-80">Minutos</div>
+                    </div>
+                     <div>
+                        <div id="seconds" class="text-4xl md:text-6xl font-bold">00</div>
+                        <div class="text-sm uppercase opacity-80">Segundos</div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center py-8 text-stone-500">
+            <p>Boa sorte!</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-btn');
+            const panels = document.querySelectorAll('.tab-panel');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(item => {
+                        item.classList.remove('tab-active');
+                        item.classList.add('border-transparent', 'text-stone-500', 'hover:text-stone-700', 'hover:border-stone-300');
+                    });
+                    
+                    tab.classList.add('tab-active');
+                    tab.classList.remove('border-transparent', 'text-stone-500', 'hover:text-stone-700', 'hover:border-stone-300');
+
+                    panels.forEach(panel => {
+                        panel.classList.add('hidden');
+                    });
+
+                    document.getElementById(tab.dataset.tab).classList.remove('hidden');
+                });
+            });
+
+            const deadline = new Date('2025-06-20T23:59:59').getTime();
+
+            const countdownInterval = setInterval(function () {
+                const now = new Date().getTime();
+                const distance = deadline - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').innerText = String(days).padStart(2, '0');
+                document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById('countdown').innerHTML = '<div class="text-2xl font-bold">O prazo terminou!</div>';
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
